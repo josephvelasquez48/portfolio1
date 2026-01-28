@@ -17,8 +17,40 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  
   {
     id: 'project1',
+    title: 'ParkingPulse',
+    description: 'AI-powered parking lot security and vehicle tracking system.',
+    imageUrl: '/parkingpulse/project3.jpeg',
+    images: [
+      { src: '/parkingpulse/pp1.png', alt: 'Live camera view' },
+      { src: '/parkingpulse/pp2.png', alt: 'Vehicle ReID system' }
+    ],
+    overview: `ParkingPulse leverages AI to monitor parking lots in real-time, 
+detecting and tracking vehicles for security, analytics, and management purposes.`,
+    features: [
+      'Real-time vehicle detection via camera feeds',
+      'Vehicle ReID and tracking across multiple cameras',
+      'Admin dashboard with history and notifications',
+      'Email summaries for parking activity'
+    ],
+    roadmap: [
+      'Mobile app for remote monitoring',
+      'Multi-zone camera support with dynamic switching',
+      'Enhanced ReID accuracy with additional embeddings',
+      'Integration with payment and reservation systems',
+      'Automated incident alerts'
+    ],
+    notes: [
+      'Optimized ReID performance for slower systems',
+      'Implemented dynamic camera zone selection',
+      'Preparing for standalone executable deployment'
+    ]
+  },
+  
+  {
+    id: 'project2',
     title: 'Lumi',
     description: 'A mental health companion app for reflection and mood tracking.',
     imageUrl: '/lumi/lumi3.png',
@@ -49,13 +81,13 @@ and the character's mood changes in response. It encourages reflection on emotio
     ]
   },
   {
-    id: 'project2',
+    id: 'project3',
     title: 'PLM',
     description: 'Product Lifecycle Management platform to streamline workflows.',
     imageUrl: '/plm/project2.png',
     images: [
       { src: '/plm/ui.png', alt: 'PLM user interface' },
-      { src: '/plm/workflow.png', alt: 'PLM workflow' }
+      { src: '/plm/ui2.png', alt: 'PLM workflow' }
     ],
     overview: `PLM is a platform designed to streamline product development workflows, 
 tracking each stage from concept to production. It provides teams with a centralized place to manage tasks, documents, and approvals.`,
@@ -77,36 +109,10 @@ tracking each stage from concept to production. It provides teams with a central
       'UI design for dashboards in progress',
       'API integrations planned for ERP systems'
     ]
-  },
-  {
-    id: 'project3',
-    title: 'ParkingPulse',
-    description: 'AI-powered parking lot security and vehicle tracking system.',
-    imageUrl: '/parkingpulse/project3.jpeg',
-    images: [
-      { src: '/parkingpulse/camera.png', alt: 'Live camera view' },
-      { src: '/parkingpulse/reid.png', alt: 'Vehicle ReID system' },
-      { src: '/parkingpulse/dashboard.png', alt: 'Admin dashboard' }
-    ],
-    overview: `ParkingPulse leverages AI to monitor parking lots in real-time, 
-detecting and tracking vehicles for security, analytics, and management purposes.`,
-    features: [
-      'Real-time vehicle detection via camera feeds',
-      'Vehicle ReID and tracking across multiple cameras',
-      'Admin dashboard with history and notifications',
-      'Email summaries for parking activity'
-    ],
-    roadmap: [
-      'Mobile app for remote monitoring',
-      'Multi-zone camera support with dynamic switching',
-      'Enhanced ReID accuracy with additional embeddings',
-      'Integration with payment and reservation systems',
-      'Automated incident alerts'
-    ],
-    notes: [
-      'Optimized ReID performance for slower systems',
-      'Implemented dynamic camera zone selection',
-      'Preparing for standalone executable deployment'
-    ]
   }
+  
 ];
+
+
+
+

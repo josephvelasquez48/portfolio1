@@ -1,122 +1,71 @@
-<script>
-  let name = '';
-  let email = '';
-  let message = '';
-  let submitted = false;
-
-  function handleSubmit() {
-    // Placeholder submit behavior
-    submitted = true;
-
-    // Later you can POST this to an API or backend
-    console.log({ name, email, message });
-  }
+<script lang="ts">
+  const contact = {
+    name: 'Joseph Velasquez',
+    location: 'Riverside, CA',
+    email: 'josephvelasquez317@gmail.com',
+    github: 'https://github.com/josephvelasquez48',
+    linkedin: 'https://www.linkedin.com/in/joseph-e-velasquez'
+  };
 </script>
 
-<section class="contact">
-  <div class="container">
-    <h1>Contact</h1>
+<main class="min-h-screen flex items-center justify-center px-6 text-gray-200">
+  <section class="w-full max-w-4xl text-center -mt-10">
 
-    <p class="intro">
-      Have a question, idea, or opportunity? Feel free to reach out.
+    <!-- Header -->
+    <h1 class="text-5xl sm:text-6xl font-light mb-6">
+      Contact
+    </h1>
+
+    <p class="text-gray-400 text-lg mb-14 max-w-2xl mx-auto">
+      I’m always open to discussing projects, research, or opportunities.
     </p>
 
-    {#if submitted}
-      <div class="success">
-        <p>Thanks for reaching out! I’ll get back to you soon.</p>
+    <!-- Card -->
+    <div class="bg-gray-900 rounded-3xl shadow-2xl p-12 space-y-10">
+
+      <!-- Name -->
+      <div>
+        <h2 class="text-2xl font-semibold text-green-400">
+          {contact.name}
+        </h2>
+        <p class="text-gray-400 text-lg">{contact.location}</p>
       </div>
-    {:else}
-      <form on:submit|preventDefault={handleSubmit}>
-        <label>
-          Name
-          <input type="text" bind:value={name} required />
-        </label>
 
-        <label>
+      <!-- Email -->
+      <div>
+        <p class="text-sm uppercase tracking-wider text-gray-500 mb-2">
           Email
-          <input type="email" bind:value={email} required />
-        </label>
+        </p>
+        <a
+          href={`mailto:${contact.email}`}
+          class="text-2xl font-light text-gray-200 hover:text-green-400 transition"
+        >
+          {contact.email}
+        </a>
+      </div>
 
-        <label>
-          Message
-          <textarea rows="5" bind:value={message} required></textarea>
-        </label>
+      <!-- Links -->
+      <div class="flex flex-col sm:flex-row gap-6 justify-center pt-6">
 
-        <button type="submit">Send Message</button>
-      </form>
-    {/if}
-  </div>
-</section>
+        <a
+          href={contact.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-8 py-4 rounded-2xl bg-gray-800 hover:bg-gray-700 text-lg transition"
+        >
+          GitHub
+        </a>
 
-<style>
-  .contact {
-    padding: 4rem 1.5rem;
-    display: flex;
-    justify-content: center;
-  }
+        <a
+          href={contact.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-8 py-4 rounded-2xl bg-gray-800 hover:bg-gray-700 text-lg transition"
+        >
+          LinkedIn
+        </a>
 
-  .container {
-    max-width: 700px;
-    width: 100%;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .intro {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: 500;
-    gap: 0.4rem;
-  }
-
-  input,
-  textarea {
-    padding: 0.6rem 0.7rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-
-  input:focus,
-  textarea:focus {
-    outline: none;
-    border-color: #555;
-  }
-
-  button {
-    margin-top: 0.5rem;
-    padding: 0.75rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    background: #111;
-    color: white;
-  }
-
-  button:hover {
-    background: #000;
-  }
-
-  .success {
-    padding: 1.25rem;
-    border-radius: 6px;
-    background: #f0fdf4;
-    border: 1px solid #86efac;
-  }
-</style>
+      </div>
+    </div>
+  </section>
+</main>
