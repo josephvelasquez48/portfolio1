@@ -22,7 +22,6 @@
   };
 
   const openProject = (id: string | undefined) => {
-    console.log('DEBUG openProject', id, 'globeRef?', !!globeRef, 'target?', id ? projectTargets[id] : null);
     if (!id) return;
     if (globeRef && projectTargets[id]) {
       globeRef.zoomToProject(id);
