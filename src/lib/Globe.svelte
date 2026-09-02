@@ -10,6 +10,7 @@
   let camera: THREE.PerspectiveCamera;
   let renderer: THREE.WebGLRenderer;
   let particleSystem: THREE.Points;
+  let resizeObserver: ResizeObserver;
 
   let zooming = false;
   let zoomTarget: THREE.Vector3 | null = null;
@@ -18,7 +19,7 @@
   export function zoomToProject(id: string) {
     if (!projectTargets[id]) return;
     const { x, y, z } = projectTargets[id];
-    zoomTarget = new THREE.Vector3(x, y, z+50);
+    zoomTarget = new THREE.Vector3(x, y, z + 50);
     zoomProjectId = id;
     zooming = true;
   }
@@ -26,31 +27,31 @@
   onMount(() => {
     initThree();
     animate();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
+    resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
   });
 
   function initThree() {
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(
-      60,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      2000
-    );
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 2000);
     camera.position.set(0, 0, 500);
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
 
     // --- Particle globe ---
-    const PARTICLE_COUNT = 8000;
+    const PARTICLE_COUNT = 6000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(PARTICLE_COUNT * 3);
     const colors = new Float32Array(PARTICLE_COUNT * 3);
+    const color = new THREE.Color();
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const theta = Math.random() * 2 * Math.PI;
@@ -66,18 +67,23 @@
       positions[stride + 1] = y;
       positions[stride + 2] = z;
 
-      colors[stride] = Math.random();
-      colors[stride + 1] = Math.random();
-      colors[stride + 2] = Math.random();
+      // Emerald-to-cyan hue range for a cohesive, on-brand look
+      const hue = 0.42 + Math.random() * 0.12;
+      const lightness = 0.4 + Math.random() * 0.35;
+      color.setHSL(hue, 0.65, lightness);
+      colors[stride] = color.r;
+      colors[stride + 1] = color.g;
+      colors[stride + 2] = color.b;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 3,
+      size: 2.2,
       vertexColors: true,
       transparent: true,
+      opacity: 0.85,
       blending: THREE.AdditiveBlending
     });
 
@@ -93,9 +99,13 @@
   }
 
   function resize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    if (!container || !camera || !renderer) return;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    if (width === 0 || height === 0) return;
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height);
   }
 
   function animate() {
@@ -120,25 +130,21 @@
   }
 </script>
 
-<!-- FULLSCREEN Particle Globe -->
-<div
-  class="absolute inset-0 w-screen h-screen overflow-hidden"
-  bind:this={container}
-></div>
+<div class="globe-container" bind:this={container}></div>
 
 <style>
-  div {
+  .globe-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     pointer-events: none;
   }
 
-  canvas {
-    width: 100vw !important;
-    height: 100vh !important;
+  .globe-container :global(canvas) {
+    width: 100% !important;
+    height: 100% !important;
     display: block;
   }
 </style>

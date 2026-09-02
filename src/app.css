@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.bg-site {
+  background-color: #05070a;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(52, 211, 153, 0.12), transparent),
+    radial-gradient(circle, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    28px 28px;
+  background-position:
+    0 0,
+    0 0;
+}

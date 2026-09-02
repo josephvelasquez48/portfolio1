@@ -14,10 +14,12 @@ export type Project = {
   features?: string[];       // Current features
   roadmap?: string[];        // Planned features / roadmap
   notes?: string[];          // Development notes / progression plan
+  tech?: string[];           // Tech stack tags
+  repoUrl?: string;          // GitHub repo link
+  liveUrl?: string;          // Live demo link
 };
 
 export const projects: Project[] = [
-  
   {
     id: 'project1',
     title: 'ParkingPulse',
@@ -27,13 +29,15 @@ export const projects: Project[] = [
       { src: '/parkingpulse/pp1.png', alt: 'Live camera view' },
       { src: '/parkingpulse/pp2.png', alt: 'Vehicle ReID system' }
     ],
-    overview: `ParkingPulse leverages AI to monitor parking lots in real-time, 
-detecting and tracking vehicles for security, analytics, and management purposes.`,
+    overview: `ParkingPulse is a real-time AI vehicle tracking platform built with Python, OpenCV, and YOLOv8
+for intelligent object detection and analytics. It ingests live camera feeds, tracks vehicles across
+multiple cameras, and surfaces the results through an admin dashboard backed by Firebase.`,
     features: [
-      'Real-time vehicle detection via camera feeds',
-      'Vehicle ReID and tracking across multiple cameras',
-      'Admin dashboard with history and notifications',
-      'Email summaries for parking activity'
+      'Real-time vehicle detection and tracking via YOLOv8 and OpenCV',
+      'RESTful APIs for real-time data ingestion, processing, and retrieval',
+      'Firebase-backed authentication and cloud data storage',
+      'Latency reductions through frame skipping and model tuning',
+      'Admin dashboard with history and notifications'
     ],
     roadmap: [
       'Mobile app for remote monitoring',
@@ -46,9 +50,10 @@ detecting and tracking vehicles for security, analytics, and management purposes
       'Optimized ReID performance for slower systems',
       'Implemented dynamic camera zone selection',
       'Preparing for standalone executable deployment'
-    ]
+    ],
+    tech: ['Python', 'OpenCV', 'YOLOv8', 'Firebase', 'REST APIs'],
+    repoUrl: 'https://github.com/loadingError117/ParkingPulse'
   },
-  
   {
     id: 'project2',
     title: 'Lumi',
@@ -60,7 +65,7 @@ detecting and tracking vehicles for security, analytics, and management purposes
       { src: '/lumi/lumi3.png', alt: 'Lumi avatar happy' },
       { src: '/lumi/lumi4.png', alt: 'Lumi avatar sad' }
     ],
-    overview: `Lumi is a mental health companion app where users can interact through talking or typing, 
+    overview: `Lumi is a mental health companion app where users can interact through talking or typing,
 and the character's mood changes in response. It encourages reflection on emotions and helps track wellbeing over time.`,
     features: [
       'Interactive mood-tracking companion',
@@ -89,7 +94,7 @@ and the character's mood changes in response. It encourages reflection on emotio
       { src: '/plm/ui.png', alt: 'PLM user interface' },
       { src: '/plm/ui2.png', alt: 'PLM workflow' }
     ],
-    overview: `PLM is a platform designed to streamline product development workflows, 
+    overview: `PLM is a platform designed to streamline product development workflows,
 tracking each stage from concept to production. It provides teams with a centralized place to manage tasks, documents, and approvals.`,
     features: [
       'Centralized workflow management',
@@ -109,10 +114,34 @@ tracking each stage from concept to production. It provides teams with a central
       'UI design for dashboards in progress',
       'API integrations planned for ERP systems'
     ]
+  },
+  {
+    id: 'project4',
+    title: 'Nom Square',
+    description: 'A restaurant menu and ordering system with a customer ordering flow and admin back office.',
+    imageUrl: '/nomsquare/item-detail.png',
+    images: [
+      { src: '/nomsquare/cart.png', alt: 'Cart with subtotal, tax, and total' },
+      { src: '/nomsquare/menu-admin.png', alt: 'Admin menu item management' },
+      { src: '/nomsquare/employee-list.png', alt: 'Employee list with role-based accounts' }
+    ],
+    overview: `Nom Square is a restaurant ordering system covering both sides of the experience: a
+customer-facing menu with itemized add-ons and a running cart, and an admin back office for managing
+menu items and employee accounts. Menu data is stored in Firebase Firestore.`,
+    features: [
+      'Customer menu browsing with item detail modals and add-ons',
+      'Cart with live subtotal, tax, and total calculation',
+      'Admin menu editor for creating, editing, and deleting items',
+      'Role-based employee account management',
+      'Firebase Firestore-backed data storage'
+    ],
+    roadmap: [
+      'Online payment integration',
+      'Order history and receipts for customers',
+      'Real-time order status for kitchen staff',
+      'Analytics dashboard for sales and popular items'
+    ],
+    tech: ['JavaScript', 'Vite', 'Firebase Firestore'],
+    repoUrl: 'https://github.com/colormak3r/nom-square'
   }
-  
 ];
-
-
-
-
