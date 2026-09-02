@@ -26,7 +26,13 @@ export const projects: Project[] = [
     description: 'AI-powered parking lot security and vehicle tracking system.',
     imageUrl: '/parkingpulse/pp1.png',
     images: [
-      { src: '/parkingpulse/pp2.png', alt: 'Vehicle ReID system' }
+      { src: '/parkingpulse/admin-home.png', alt: 'Admin desktop app home screen' },
+      { src: '/parkingpulse/pp2.png', alt: 'Vehicle ReID system' },
+      { src: '/parkingpulse/logged-vehicles.png', alt: 'Logged vehicle history' },
+      { src: '/parkingpulse/settings.png', alt: 'Admin settings — ReID threshold and log limits' },
+      { src: '/parkingpulse/inference-log.png', alt: 'YOLOv8 inference and ReID matching logs' },
+      { src: '/parkingpulse/firestore-console.png', alt: 'Firebase Firestore vehicle data' },
+      { src: '/parkingpulse/vehicle-log-email.png', alt: 'Automated vehicle log email summary' }
     ],
     overview: `ParkingPulse is a real-time AI vehicle tracking platform built with Python, OpenCV, and YOLOv8
 for intelligent object detection and analytics. It ingests live camera feeds, tracks vehicles across
