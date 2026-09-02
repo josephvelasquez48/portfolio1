@@ -6,7 +6,27 @@
   };
 
   const { project } = data;
+
+  let lightboxSrc: string | null = null;
+  let lightboxAlt = '';
+
+  function openLightbox(src: string, alt: string) {
+    lightboxSrc = src;
+    lightboxAlt = alt;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightboxSrc = null;
+    document.body.style.overflow = '';
+  }
+
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') closeLightbox();
+  }
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <div class="max-w-5xl mx-auto px-6 pt-8 pb-24 space-y-12 text-gray-300">
   <a
@@ -59,11 +79,17 @@
 
   <!-- Cover Image -->
   <div>
-    <img
-      src={project.imageUrl}
-      alt={project.title}
-      class="w-full h-[420px] object-cover object-[30%_30%] rounded-xl ring-1 ring-white/10 shadow-lg"
-    />
+    <button
+      type="button"
+      class="block w-full cursor-zoom-in"
+      on:click={() => openLightbox(project.imageUrl, project.title)}
+    >
+      <img
+        src={project.imageUrl}
+        alt={project.title}
+        class="w-full h-[420px] object-cover object-[30%_30%] rounded-xl ring-1 ring-white/10 shadow-lg"
+      />
+    </button>
   </div>
 
   <!-- Overview -->
@@ -116,16 +142,49 @@
       <h2 class="text-2xl font-semibold text-gray-100 mb-6">Project Gallery</h2>
       <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {#each project.images as image}
-          <div class="overflow-hidden rounded-xl bg-gray-900 ring-1 ring-white/10 shadow-md group">
+          <button
+            type="button"
+            class="overflow-hidden rounded-xl bg-gray-900 ring-1 ring-white/10 shadow-md group cursor-zoom-in"
+            on:click={() => openLightbox(image.src, image.alt ?? project.title)}
+          >
             <img
               src={image.src}
               alt={image.alt ?? project.title}
               class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
             />
-          </div>
+          </button>
         {/each}
       </div>
     </section>
   {/if}
 </div>
+
+{#if lightboxSrc}
+  <div
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-6"
+    on:click={closeLightbox}
+    role="button"
+    tabindex="0"
+    on:keydown={(e) => e.key === 'Enter' && closeLightbox()}
+  >
+    <button
+      type="button"
+      class="absolute top-5 right-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-gray-200 ring-1 ring-white/20 hover:bg-white/20 transition-colors"
+      on:click={closeLightbox}
+      aria-label="Close"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div on:click|stopPropagation role="presentation">
+      <img
+        src={lightboxSrc}
+        alt={lightboxAlt}
+        class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+      />
+    </div>
+  </div>
+{/if}
