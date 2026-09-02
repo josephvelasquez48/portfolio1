@@ -1,9 +1,6 @@
 <script lang="ts">
   import * as THREE from 'three';
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-
-  export let projectTargets: Record<string, { x: number; y: number; z: number }> = {};
-  const dispatch = createEventDispatcher();
+  import { onMount } from 'svelte';
 
   let container: HTMLDivElement;
   let scene: THREE.Scene;
@@ -11,25 +8,20 @@
   let renderer: THREE.WebGLRenderer;
   let particleSystem: THREE.Points;
   let resizeObserver: ResizeObserver;
-
-  let zooming = false;
-  let zoomTarget: THREE.Vector3 | null = null;
-  let zoomProjectId: string | null = null;
-
-  export function zoomToProject(id: string) {
-    if (!projectTargets[id]) return;
-    const { x, y, z } = projectTargets[id];
-    zoomTarget = new THREE.Vector3(x, y, z + 50);
-    zoomProjectId = id;
-    zooming = true;
-  }
+  let destroyed = false;
 
   onMount(() => {
     initThree();
     animate();
     resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
-    return () => resizeObserver.disconnect();
+    return () => {
+      destroyed = true;
+      resizeObserver.disconnect();
+      renderer.dispose();
+      particleSystem.geometry.dispose();
+      (particleSystem.material as THREE.Material).dispose();
+    };
   });
 
   function initThree() {
@@ -109,23 +101,11 @@
   }
 
   function animate() {
+    if (destroyed) return;
     requestAnimationFrame(animate);
 
-    if (!zooming) {
-      particleSystem.rotation.y += 0.0015;
-      particleSystem.rotation.x += 0.0003;
-    }
-
-    if (zooming && zoomTarget) {
-      const current = camera.position;
-      current.lerp(zoomTarget, 0.05);
-      camera.lookAt(zoomTarget);
-
-      if (current.distanceTo(zoomTarget) < 1) {
-        zooming = false;
-        dispatch('zoomComplete', { id: zoomProjectId });
-      }
-    }
+    particleSystem.rotation.y += 0.0015;
+    particleSystem.rotation.x += 0.0003;
 
     renderer.render(scene, camera);
   }

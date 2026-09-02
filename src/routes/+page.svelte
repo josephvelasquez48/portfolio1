@@ -1,30 +1,10 @@
 <script lang="ts">
   import Globe from '$lib/Globe.svelte';
-  import { goto } from '$app/navigation';
   import { projects } from '$lib/projects';
-
-  let globeRef: Globe;
 
   const mid = Math.ceil(projects.length / 2);
   const leftProjects = projects.slice(0, mid);
   const rightProjects = projects.slice(mid);
-
-  const projectTargets: Record<string, { x: number; y: number; z: number }> = {
-    project1: { x: -150, y: 60, z: 0 },
-    project4: { x: 150, y: -60, z: 0 }
-  };
-
-  const openProject = (id: string) => {
-    if (globeRef && projectTargets[id]) {
-      globeRef.zoomToProject(id);
-    } else {
-      goto(`/projects/${id}`);
-    }
-  };
-
-  const handleZoomComplete = (e: CustomEvent<{ id: string | null }>) => {
-    if (e.detail.id) goto(`/projects/${e.detail.id}`);
-  };
 
   const coreSkills = [
     'Python',
@@ -80,9 +60,9 @@
     <!-- LEFT PROJECTS -->
     <div class="flex flex-col gap-6 items-start">
       {#each leftProjects as project}
-        <button
-          on:click={() => openProject(project.id)}
-          class="group relative w-full h-[200px] rounded-xl overflow-hidden bg-gray-900 ring-1 ring-white/5 shadow-lg hover:shadow-emerald-400/10 hover:ring-emerald-400/30 transition-all duration-300 text-left"
+        <a
+          href={`/projects/${project.id}`}
+          class="group relative w-full h-[200px] rounded-xl overflow-hidden bg-gray-900 ring-1 ring-white/5 shadow-lg hover:shadow-emerald-400/10 hover:ring-emerald-400/30 transition-all duration-300"
         >
           <img
             src={project.imageUrl}
@@ -94,21 +74,21 @@
             <h2 class="text-lg font-semibold text-gray-100">{project.title}</h2>
             <p class="text-gray-400 text-xs line-clamp-2 mt-1">{project.description}</p>
           </div>
-        </button>
+        </a>
       {/each}
     </div>
 
     <!-- CENTER GLOBE -->
     <div class="relative w-full h-[50vh] min-h-[320px]">
-      <Globe bind:this={globeRef} {projectTargets} on:zoomComplete={handleZoomComplete} />
+      <Globe />
     </div>
 
     <!-- RIGHT PROJECTS -->
     <div class="flex flex-col gap-6 items-start">
       {#each rightProjects as project}
-        <button
-          on:click={() => openProject(project.id)}
-          class="group relative w-full h-[200px] rounded-xl overflow-hidden bg-gray-900 ring-1 ring-white/5 shadow-lg hover:shadow-emerald-400/10 hover:ring-emerald-400/30 transition-all duration-300 text-left"
+        <a
+          href={`/projects/${project.id}`}
+          class="group relative w-full h-[200px] rounded-xl overflow-hidden bg-gray-900 ring-1 ring-white/5 shadow-lg hover:shadow-emerald-400/10 hover:ring-emerald-400/30 transition-all duration-300"
         >
           <img
             src={project.imageUrl}
@@ -120,7 +100,7 @@
             <h2 class="text-lg font-semibold text-gray-100">{project.title}</h2>
             <p class="text-gray-400 text-xs line-clamp-2 mt-1">{project.description}</p>
           </div>
-        </button>
+        </a>
       {/each}
     </div>
   </section>
