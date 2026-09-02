@@ -87,5 +87,31 @@ menu items and employee accounts. Menu data is stored in Firebase Firestore.`,
     ],
     tech: ['JavaScript', 'Vite', 'Firebase Firestore'],
     repoUrl: 'https://github.com/colormak3r/nom-square'
+  },
+  {
+    id: 'project5',
+    title: 'RAG Office Assistant',
+    description: 'A retrieval-augmented chatbot that answers patient FAQs using a fully local LLM.',
+    imageUrl: '/ragchat/chat-demo.png',
+    images: [{ src: '/ragchat/chat-demo.png', alt: 'Chat UI answering an office hours question' }],
+    overview: `A retrieval-augmented generation (RAG) chatbot built for a medical office FAQ use case.
+Instead of calling a third-party AI API, it runs entirely on a local LLM through Ollama, so patient
+questions and office data never leave the machine. A FAISS vector index over the office knowledge
+base grounds every answer in real office info rather than letting the model improvise.`,
+    features: [
+      'FAISS vector search over office FAQ documents using sentence-transformer embeddings',
+      'Local LLM inference via Ollama — no patient data sent to an external API',
+      'FastAPI backend streaming responses to the browser over Server-Sent Events',
+      'Automatic index building on first run from any .txt file dropped into the knowledge base',
+      'Fully Dockerized with docker-compose for the API and Ollama services'
+    ],
+    roadmap: [
+      'Swap the flat FAISS index for chunked, overlapping passages on longer documents',
+      'Add conversation memory for multi-turn context',
+      'Source citations in responses',
+      'Web-based admin UI for managing the knowledge base'
+    ],
+    tech: ['Python', 'FastAPI', 'Ollama', 'FAISS', 'sentence-transformers', 'Docker'],
+    repoUrl: 'https://github.com/josephvelasquez48/rag-office-assistant'
   }
 ];
