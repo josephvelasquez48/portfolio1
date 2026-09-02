@@ -5,7 +5,7 @@
 
 <main
   class="relative min-h-screen flex items-center justify-center p-6 overflow-hidden"
-  style="background-image: url('/test_upscaled.jpg'); background-size: 80%; background-position: center; background-repeat: no-repeat;">
+  style="background-image: url('/test.png'); background-size: 80%; background-position: center; background-repeat: no-repeat;">
   
   <section class="about bg-black/60 p-8 rounded-lg text-green-200 max-w-3xl z-10 flex flex-col items-center">
     

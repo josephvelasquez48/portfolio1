@@ -109,9 +109,11 @@
     if (zooming && zoomTarget) {
       const current = camera.position;
       current.lerp(zoomTarget, 0.03);
+      if (Math.random() < 0.02) console.log('DEBUG zoom', current.toArray(), zoomTarget.toArray(), current.distanceTo(zoomTarget));
 
       if (current.distanceTo(zoomTarget) < 1) {
         zooming = false;
+        console.log('DEBUG zoomComplete fired', zoomProjectId);
         dispatch('zoomComplete', { id: zoomProjectId });
       }
     }

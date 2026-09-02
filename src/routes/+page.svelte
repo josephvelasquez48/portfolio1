@@ -1,44 +1,38 @@
 <script lang="ts">
   import Globe from '$lib/Globe.svelte';
   import { goto } from '$app/navigation';
+  import { projects } from '$lib/projects';
 
-  let globeRef: any;
+  let globeRef: Globe;
 
-  const projects = [
-    {
-      id: 'project1',
-      title: 'ParkingPulse',
-      description:
-        'ParkingPulse is an AI-powered parking lot monitoring system that tracks vehicles and improves security. It uses computer vision for real-time alerts, vehicle identification, and optimized parking space management.',
-      imageUrl: '/parkingpulse/project3.jpeg'
-    },
-    {
-      id: 'project2',
-      title: 'Lumi',
-      description:
-        'Lumi is a mental health companion app. Users interact with Lumi by talking or typing to it, and the character’s mood changes in response, helping users reflect on their emotions and mental wellbeing.',
-      imageUrl: '/lumi/lumi3.png'
-    },
-    {
-      id: 'project3',
-      title: 'PLM',
-      description:
-        'PLM (Product Lifecycle Manager) centralizes product development workflows, automates version control, and ensures team alignment from concept to launch, streamlining collaboration across the entire product lifecycle.',
-      imageUrl: '/plm/project2.png'
-    },
-    {
-      id: 'project4',
-      title: 'Future Projects',
-      description: 'Exciting projects coming soon!',
-      // No imageUrl here
+  type CardProject = { id?: string; title: string; description: string; imageUrl?: string };
+
+  const futureProject: CardProject = {
+    title: 'Future Projects',
+    description: 'Exciting projects coming soon!'
+  };
+
+  const leftProjects: CardProject[] = projects;
+  const rightProjects: CardProject[] = [futureProject];
+
+  const projectTargets: Record<string, { x: number; y: number; z: number }> = {
+    project1: { x: -150, y: 60, z: 0 },
+    project2: { x: 150, y: -60, z: 0 },
+    project3: { x: 0, y: 150, z: -80 }
+  };
+
+  const openProject = (id: string | undefined) => {
+    console.log('DEBUG openProject', id, 'globeRef?', !!globeRef, 'target?', id ? projectTargets[id] : null);
+    if (!id) return;
+    if (globeRef && projectTargets[id]) {
+      globeRef.zoomToProject(id);
+    } else {
+      goto(`/projects/${id}`);
     }
-  ];
+  };
 
-  const leftProjects = projects.slice(0, 3);
-  const rightProjects = projects.slice(3, 6);
-
-  const openProject = (id: string) => {
-    goto(`/projects/${id}`);
+  const handleZoomComplete = (e: CustomEvent<{ id: string | null }>) => {
+    if (e.detail.id) goto(`/projects/${e.detail.id}`);
   };
 </script>
 
@@ -87,7 +81,7 @@
 
     <!-- CENTER GLOBE -->
     <div class="w-full h-[60vh] mt-6">
-      <Globe bind:this={globeRef} />
+      <Globe bind:this={globeRef} {projectTargets} on:zoomComplete={handleZoomComplete} />
     </div>
 
     <!-- RIGHT PROJECTS -->
