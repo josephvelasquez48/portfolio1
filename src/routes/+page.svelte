@@ -5,14 +5,13 @@
 
   let globeRef: Globe;
 
-  const leftProjects = projects.slice(0, 3);
-  const rightProjects = projects.slice(3);
+  const mid = Math.ceil(projects.length / 2);
+  const leftProjects = projects.slice(0, mid);
+  const rightProjects = projects.slice(mid);
 
   const projectTargets: Record<string, { x: number; y: number; z: number }> = {
     project1: { x: -150, y: 60, z: 0 },
-    project2: { x: 150, y: -60, z: 0 },
-    project3: { x: 0, y: 150, z: -80 },
-    project4: { x: 0, y: -150, z: 80 }
+    project4: { x: 150, y: -60, z: 0 }
   };
 
   const openProject = (id: string) => {

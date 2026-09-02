@@ -55,67 +55,6 @@ multiple cameras, and surfaces the results through an admin dashboard backed by 
     repoUrl: 'https://github.com/loadingError117/ParkingPulse'
   },
   {
-    id: 'project2',
-    title: 'Lumi',
-    description: 'A mental health companion app for reflection and mood tracking.',
-    imageUrl: '/lumi/lumi3.png',
-    images: [
-      { src: '/lumi/lumi1.png', alt: 'Lumi avatar mad' },
-      { src: '/lumi/lumi2.png', alt: 'Lumi avatar nuetral' },
-      { src: '/lumi/lumi3.png', alt: 'Lumi avatar happy' },
-      { src: '/lumi/lumi4.png', alt: 'Lumi avatar sad' }
-    ],
-    overview: `Lumi is a mental health companion app where users can interact through talking or typing,
-and the character's mood changes in response. It encourages reflection on emotions and helps track wellbeing over time.`,
-    features: [
-      'Interactive mood-tracking companion',
-      'Text-based reflection on user input',
-      'Simple visualization of character mood'
-    ],
-    roadmap: [
-      'Expanded character interactions and responses',
-      'Mood analytics and history tracking',
-      'AI-driven suggestions for self-care activities',
-      'Mobile push notifications for daily check-ins',
-      'Integration with mental health resources'
-    ],
-    notes: [
-      'Currently building the core interaction system',
-      'Working on securely storing user mood data',
-      'Planning UI improvements and better feedback animations'
-    ]
-  },
-  {
-    id: 'project3',
-    title: 'PLM',
-    description: 'Product Lifecycle Management platform to streamline workflows.',
-    imageUrl: '/plm/project2.png',
-    images: [
-      { src: '/plm/ui.png', alt: 'PLM user interface' },
-      { src: '/plm/ui2.png', alt: 'PLM workflow' }
-    ],
-    overview: `PLM is a platform designed to streamline product development workflows,
-tracking each stage from concept to production. It provides teams with a centralized place to manage tasks, documents, and approvals.`,
-    features: [
-      'Centralized workflow management',
-      'Task and document tracking',
-      'Approval and review system',
-      'Customizable dashboards'
-    ],
-    roadmap: [
-      'Integrate analytics for project efficiency',
-      'Add role-based access controls',
-      'Implement notifications and reminders',
-      'Mobile-friendly interface',
-      'Enhanced collaboration tools'
-    ],
-    notes: [
-      'Core backend architecture is complete',
-      'UI design for dashboards in progress',
-      'API integrations planned for ERP systems'
-    ]
-  },
-  {
     id: 'project4',
     title: 'Nom Square',
     description: 'A restaurant menu and ordering system with a customer ordering flow and admin back office.',

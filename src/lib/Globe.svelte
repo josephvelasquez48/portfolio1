@@ -118,7 +118,8 @@
 
     if (zooming && zoomTarget) {
       const current = camera.position;
-      current.lerp(zoomTarget, 0.03);
+      current.lerp(zoomTarget, 0.05);
+      camera.lookAt(zoomTarget);
 
       if (current.distanceTo(zoomTarget) < 1) {
         zooming = false;
