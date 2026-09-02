@@ -27,6 +27,7 @@ export const projects: Project[] = [
     imageUrl: '/parkingpulse/pp1.png',
     images: [
       { src: '/parkingpulse/admin-home.png', alt: 'Admin desktop app home screen' },
+      { src: '/parkingpulse/multi-camera-feed.jpg', alt: 'Composite feed from 9 parking lot cameras' },
       { src: '/parkingpulse/pp2.png', alt: 'Vehicle ReID system' },
       { src: '/parkingpulse/logged-vehicles.png', alt: 'Logged vehicle history' },
       { src: '/parkingpulse/settings.png', alt: 'Admin settings — ReID threshold and log limits' },
