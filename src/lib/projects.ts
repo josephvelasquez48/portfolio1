@@ -24,9 +24,8 @@ export const projects: Project[] = [
     id: 'project1',
     title: 'ParkingPulse',
     description: 'AI-powered parking lot security and vehicle tracking system.',
-    imageUrl: '/parkingpulse/project3.jpeg',
+    imageUrl: '/parkingpulse/pp1.png',
     images: [
-      { src: '/parkingpulse/pp1.png', alt: 'Live camera view' },
       { src: '/parkingpulse/pp2.png', alt: 'Vehicle ReID system' }
     ],
     overview: `ParkingPulse is a real-time AI vehicle tracking platform built with Python, OpenCV, and YOLOv8
