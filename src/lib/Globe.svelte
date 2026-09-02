@@ -16,11 +16,13 @@
   let zoomProjectId: string | null = null;
 
   export function zoomToProject(id: string) {
+    console.log('DEBUG zoomToProject called', id, projectTargets);
     if (!projectTargets[id]) return;
     const { x, y, z } = projectTargets[id];
     zoomTarget = new THREE.Vector3(x, y, z+50);
     zoomProjectId = id;
     zooming = true;
+    console.log('DEBUG zooming set to', zooming, zoomTarget);
   }
 
   onMount(() => {
