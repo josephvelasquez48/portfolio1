@@ -128,7 +128,7 @@ base grounds every answer in real office info rather than letting the model impr
 		images: [
 			{
 				src: '/homelab/dashboard.png',
-				alt: 'Live cluster status dashboard — nodes, Argo CD apps, pods, and a gaming-mode toggle'
+				alt: 'Homelab dashboard — gaming-mode cordon/drain log, plus live Pi and desktop node metrics cards'
 			},
 			{
 				src: '/homelab/architecture.png',
